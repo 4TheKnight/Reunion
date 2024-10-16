@@ -1,0 +1,76 @@
+{% extends "master.html" %}
+
+{% block title %}Home{% endblock title %}
+ 
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black; width: 100%;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Welcome, {{ request.user }}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- Add other navbar links here if needed -->
+            </ul>
+            <form method="post" action="{% url 'logout' %}" class="d-flex">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning">Logout</button>
+            </form>
+            <form method="post" action="{% url 'delete_user' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger" >Delete_user</button>
+            </form>
+            <form action="{% url 'makepost' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success" >Makepost</button>
+            </form>
+            
+        </div>
+
+    </div>
+</nav>
+
+<!___ Nvabar>
+<div class="container-fluid mt-3" >
+    <div class="row">
+        {% for post in data %}
+        <div class="col-md-4 p-3 bg-primary text-white post-box">
+            <p> Post - {{post.desciption}}  <br> By - <a href ="{% url 'viewprofile' profile_user=post.author%}" class="btn btn-dark"> {{post.author}} </a> </p>
+           {%if post.image %}
+                <img src='/media/{{post.image}}'>
+            {% endif %}
+            <a href = "{% url  'likepost' post_id=post.id %} " class="btn btn-success"> like/unlike </a>
+            <form method="POST" action="{% url 'makecomment' post_id=post.id %}">
+                {% csrf_token %}
+                <textarea name="comment" placeholder="Write your comment here..." required></textarea><br>
+                <button type="submit" class="btn btn-secondary">Submit Comment</button>
+            </form>
+            <a href ="{% url 'showcomments' post_id=post.id%}" class="btn btn-dark"> Watch Comments </a>
+            <br>
+            <a href ="{% url 'likedby' post_id=post.id%}" class="btn btn-light"> See Liked By Whom </a>
+            {% if request.user == post.author.user %}
+            <a href ="{% url 'deletepost' post_id=post.id%}" class="btn btn-danger">  Delete post </a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<style>
+    .post-box {
+        height: 500px; /* Set the desired fixed height */
+        overflow-y: auto; /* Enable scrolling if content exceeds height */
+    }
+
+    .post-box img {
+        max-height: 350x; /* Limit the image height */
+        width: 100%; /* Make the image responsive */
+        object-fit: cover; /* Ensure the image fills the space without distortion */
+    }
+</style>
+{% endblock content %}
+
+

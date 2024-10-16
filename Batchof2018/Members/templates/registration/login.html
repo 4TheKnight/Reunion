@@ -1,0 +1,14 @@
+{% extends "master.html" %}
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block content %}
+    <h1>Login User</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Login</button>
+        </form>
+        <a href="{% url 'register' %} "class="btn btn-primary">register</a>
+{% endblock content %}

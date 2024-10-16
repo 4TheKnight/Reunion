@@ -1,0 +1,10 @@
+{% extends "master.html" %}
+
+{% block title %} Make Post {% endblock title %}  
+{% block content %}
+        <h1>Comments </h1>
+        {% for Comments in comment %}
+        <h4>made by {{Comments.author}}</h4>
+        <p>comment = {{Comments.comment}}</p>
+        {% endfor %}
+{% endblock content %}

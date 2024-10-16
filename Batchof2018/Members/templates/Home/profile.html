@@ -1,0 +1,10 @@
+{% extends "master.html" %}
+
+{% block title %} Make Post {% endblock title %}  
+{% block content %}
+        <h2>username - {{user_profile}} </h2>
+        <h3>Bio - {{user_profile.bio}}</h3>
+        {% if user_profile.image %}
+            <img src='/media/{{user_profile.image}}'>
+        {% endif %}
+{% endblock content %}

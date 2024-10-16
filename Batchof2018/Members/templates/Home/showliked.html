@@ -1,0 +1,10 @@
+{% extends "master.html" %}
+
+{% block title %} Likes {% endblock title %}  
+
+{% block content %}
+        <h1> <u>Likes</u> </h1>
+        {% for like in liked_by %}
+        <h4>liked by - {{like}} </h4> 
+        {% endfor %}
+{% endblock content %}
