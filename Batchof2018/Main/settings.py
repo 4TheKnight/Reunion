@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-swcebn#w5mtbg%e#g59msh52%wdlj+c3wm#fip3*duudzh#a(g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['reunion-a4aa.onrender.com','localhost', '127.0.0.1']
 
 MEDIA_URL= '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
