@@ -1,12 +1,12 @@
 import os
+import sys
+
+# Add the project root directory to the Python path
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(project_root)
+
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Batchof2018.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Main.settings')
 
-# Debugging output
-print("DJANGO_SETTINGS_MODULE:", os.environ.get('DJANGO_SETTINGS_MODULE'))
-
-try:
-    application = get_wsgi_application()
-except Exception as e:
-    print("Error loading application:", e)
+application = get_wsgi_application()
